@@ -1,12 +1,16 @@
 <!DOCTYPE html5>
 <html>
 <head>
-<title>STARFIELDS</title>
-<script src="script.js" ></script>
+    <title>STARFIELDS</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+
 <body>
-<canvas id='the-space' width='1000' height='600'>
-    Your browser does not support the HTML5 Canvas element.
-    Please update your browser.
-</canvas>
+
+    <canvas id='the-horizon' width="1000" height="600" style="z-index: 0;"></canvas>
+    <canvas id='the-space'   width="1000" height="600" style="z-index: 1;"></canvas>
+
 </body>
+
+    <script src="script.js" ></script>
+
 </html>

@@ -2,15 +2,24 @@ var MAX_DEPTH = 128,
     MAX_STARS = 64,
     LOOP_SPEED = 70;
 
-var canvas, ctx;
+var horizon, horizon_ctx,
+    space, space_ctx,
+    game, game_ctx;
+
 var stars = new Array(MAX_STARS);
 
 window.onload = function() {
-  canvas = document.getElementById("the-space");
-  if( canvas && canvas.getContext ) {
-    ctx = canvas.getContext("2d");
-    initStars();
-    setInterval(loop, LOOP_SPEED);
+  horizon = document.getElementById("the-horizon");
+  space   = document.getElementById("the-space");
+
+  if( horizon && horizon.getContext &&
+      space && space.getContext) {
+    // canvases are ok
+    horizon_ctx = horizon.getContext("2d");
+    space_ctx   = space.getContext("2d");
+
+    // init canvases contents
+    initHorizon();
    }
 };
 
@@ -19,7 +28,7 @@ function randomRange(minVal,maxVal) {
   return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
 }
 
-function initStars() {
+function initSpace() {
   for( var i = 0; i < stars.length; i++ ) {
     stars[i] = {
       x: randomRange(-25,25),
@@ -29,12 +38,27 @@ function initStars() {
   }
 }
 
-function loop() {
-  var halfWidth  = canvas.width / 2;
-  var halfHeight = canvas.height / 2;
+function initHorizon() {
 
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  var bg = new Image();
+  bg.onload = function() {
+    horizon_ctx.drawImage(bg, 0, 225, 1000, 150);
+    initSpace();
+    setInterval(spaceLoop, LOOP_SPEED);
+  };
+  horizon_ctx.fillStyle = "rgb(0, 0, 0)";
+  horizon_ctx.fillRect(0, 0, horizon.width, horizon.height);
+  bg.src = "assets/horizon.jpg";
+}
+
+function spaceLoop() {
+  var halfWidth  = space.width / 2,
+      halfHeight = space.height / 2,
+      eraseAlpha = 1;
+
+  space_ctx.fillStyle = "rgba(255, 255, 255, " + eraseAlpha + ")";
+  space_ctx.clearRect(0, 0, space.width, space.height)
+  space_ctx.beginPath();
 
   for( var i = 0; i < stars.length; i++ ) {
     stars[i].z -= 0.2;
@@ -52,8 +76,8 @@ function loop() {
     if( px >= 0 && px <= 1000 && py >= 0 && py <= 600 ) {
       var size = (1 - stars[i].z / 32.0) * 5;
       var shade = parseInt((1 - stars[i].z / 32.0) * 255, 10);
-      ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
-      ctx.fillRect(px,py,size,size);
+      space_ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
+      space_ctx.fillRect(px, py, size, size);
     }
   }
 }
