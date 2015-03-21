@@ -13,16 +13,36 @@ canvas {
 
 #game {
     background-color: transparent;
-    width: 30%;
-    height: 30%;
     position: absolute;
-    left: 480;
-    top: 280;
-    color: white;
+    width: 280px;
+    height: 100px;
+    left: 375;
+    top: 265;
+    color: #F8F8FF;
+    text-align: center;
+    display: block;
+    margin: auto;
 }
 
 #text{
-    background-color: inherit;
-}
+    margin: 5px;
+    color: #F8F8FF;
+    background-color: rgba(34,42,18, 0.5);}
 
-#btn {}
+.btn {
+    color: #F8F8FF;
+    background-color: rgba(34,42,18, 0.5);}
+
+
+/* things */
+.round {
+    /* set border styling */
+    border-color: rgba(25,32,14, 0.5);
+    border-style: solid;
+    border-width: 3px;
+
+    /* set border roundness */
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
