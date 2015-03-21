@@ -1,4 +1,28 @@
+#container {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+}
+
 canvas {
     background-color: transparent;
     position: absolute;
+    width: 100%;
+    height: 100%;
 }
+
+#game {
+    background-color: transparent;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    left: 480;
+    top: 280;
+    color: white;
+}
+
+#text{
+    background-color: inherit;
+}
+
+#btn {}

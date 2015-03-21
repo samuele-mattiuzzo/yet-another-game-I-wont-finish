@@ -1,6 +1,6 @@
-var MAX_DEPTH = 128,
+var MAX_DEPTH = 64,
     MAX_STARS = 64,
-    LOOP_SPEED = 70;
+    LOOP_SPEED = 100;
 
 var horizon, horizon_ctx,
     space, space_ctx,
@@ -46,6 +46,7 @@ function initHorizon() {
     initSpace();
     setInterval(spaceLoop, LOOP_SPEED);
   };
+
   horizon_ctx.fillStyle = "rgb(0, 0, 0)";
   horizon_ctx.fillRect(0, 0, horizon.width, horizon.height);
   bg.src = "assets/horizon.jpg";
@@ -61,7 +62,7 @@ function spaceLoop() {
   space_ctx.beginPath();
 
   for( var i = 0; i < stars.length; i++ ) {
-    stars[i].z -= 0.2;
+    stars[i].z -= 0.1;
 
     if( stars[i].z <= 0 ) {
       stars[i].x = randomRange(-25,25);
@@ -69,7 +70,7 @@ function spaceLoop() {
       stars[i].z = MAX_DEPTH;
     }
 
-    var k  = 128.0 / stars[i].z;
+    var k  = MAX_DEPTH / stars[i].z;
     var px = stars[i].x * k + halfWidth;
     var py = stars[i].y * k + halfHeight;
 
