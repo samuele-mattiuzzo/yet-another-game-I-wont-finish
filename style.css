@@ -1,4 +1,6 @@
-#container {
+body { font-family: 'Roboto', sans-serif; }
+
+.container {
     position: relative;
     width: 1000px;
     height: 600px;
@@ -11,38 +13,70 @@ canvas {
     height: 100%;
 }
 
-#game {
+/* game interface */
+.hud {
     background-color: transparent;
     position: absolute;
     width: 280px;
-    height: 100px;
-    left: 375;
-    top: 265;
+    height: 50px;
+    left: 25px;
+    top: 25px;
     color: #F8F8FF;
-    text-align: center;
     display: block;
-    margin: auto;
+    margin: auto;  
+    text-align: right;
+    font-size: 12;
 }
 
-#text{
-    margin: 5px;
+.stat { display: inline; }
+
+.game {
+    background-color: transparent;
+    position: absolute;
+    width: 280px;
+    height: 250px;
+    left: 375;
+    top: 200;
     color: #F8F8FF;
-    background-color: rgba(34,42,18, 0.5);}
+    display: block;
+    font-size: 14;
+}
+
+.text{
+    margin-bottom: 15px;
+    color: #F8F8FF;
+    display: block;
+    width: 280px;
+    height: 100px;
+}
+
+.btn-row {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 .btn {
     color: #F8F8FF;
-    background-color: rgba(34,42,18, 0.5);}
+    width: 45%;
+}
 
+.timer {
+    display: block;
+    width: 100%;
+}
 
 /* things */
 .round {
     /* set border styling */
-    border-color: rgba(25,32,14, 0.5);
+    background-color: #222a12;
+    background-color: rgba(34, 42, 18, 0.85);
+    border-color: #19200e;
+    border-color: rgba(25, 32, 14, 1);
     border-style: solid;
     border-width: 3px;
 
     /* set border roundness */
     border-radius: 15px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
 }
