@@ -15,11 +15,31 @@ function Story() {
     
     this.current_read = 0;
     this.max_reads = 5;
+    
+    this.setButtons = function(choices) {
+        btn_1.innerHTML = choices[1].text;
+        btn_1.value = choices[1].value;
+        btn_2.innerHTML = choices[2].text;
+        btn_2.value = choices[2].value;
+        btn_3.innerHTML = choices[3].text;
+        btn_3.value = choices[3].value;
+        btn_4.innerHTML = choices[4].text;
+        btn_4.value = choices[4].value;
+    };
 
+    this.resetButtons = function(choices) {
+        btn_1.innerHTML = '';
+        btn_1.value = '';
+        btn_2.innerHTML = '';
+        btn_2.value = '';
+        btn_3.innerHTML = '';
+        btn_3.value = '';
+        btn_4.innerHTML = '';
+        btn_4.value = '';
+    };
+    
     this.readNext = function() {
-        if (this.current_level == this.max_levels){
-            return;
-        }
+        if (this.current_level == this.max_levels){ return; }
 
         if (this.current_read == this.max_reads) {
             this.nextChapter();
@@ -30,35 +50,31 @@ function Story() {
         text.innerHTML = STORY[this.current_level][this.current_read]['text'];
 
         if (choices !== false) {
-            btn_1.innerHTML = choices[1].text;
-            btn_1.value = choices[1].value;
-            btn_2.innerHTML = choices[2].text;
-            btn_2.value = choices[2].value;
-            btn_3.innerHTML = choices[3].text;
-            btn_3.value = choices[3].value;
-            btn_4.innerHTML = choices[4].text;
-            btn_4.value = choices[4].value;
+            this.setButtons(choices);
             this.startProgress();
         } else {
-            setTimeout(this.readNext, SEC * READ_SPEED);
+            this.resetButtons();
+            var self = this;
+            setTimeout(function(){ self.readNext(); }, SEC * READ_SPEED);
         }
     };
-    
+
     this.nextChapter = function() {
         this.current_level += 1;
-        this.current_read = 1;
+        this.current_read = 0;
     };
     
     this.startProgress = function() {
         var counter = 100,
-            delta = (TIMER_LENGTH * 100 / counter);
+            delta = (TIMER_LENGTH * 100 / counter),
+            self = this;
         (function pbLoop() {
             counter -= delta;
             timer.value = counter;
             if (counter > 0) {
                 setTimeout(pbLoop, SEC);
             } else {
-                this.readNext();
+                self.readNext();
             }
         })();
     };
