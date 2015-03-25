@@ -8,22 +8,32 @@ STORY[1] = {
     2: {
         'text': 'Second text',
         'choices': {
-            1: {'text': 'I am lost', 'value':'panic|+'},
-            2: {'text': 'I loved her', 'value':'sad|+'},
-            3: {'text': 'Check status', 'value':'wise|+'},
-            4: {'text': 'What happened', 'value':'confusion|+'}
+            1: {'text': 'I am lost', 'value':'panic|10'},
+            2: {'text': 'I loved her', 'value':'sad|10'},
+            3: {'text': 'Check status', 'value':'wise|10'},
+            4: {'text': 'What happened', 'value':'confusion|10'}
         }
     },
     3: {
-        'text': '',
-        'choices': false
+        'text': 'Third text',
+        'choices': {
+            1: {'text': 'I am lost', 'value':'panic|10'},
+            2: {'text': 'I loved her', 'value':'sad|10'},
+            3: {'text': 'Check status', 'value':'hope|-10'},
+            4: {'text': 'What happened', 'value':'confusion|10'}
+        }
     },
     4: {
-        'text': '',
-        'choices': false
+        'text': 'Fourth text',
+        'choices': {
+            1: {'text': 'I am lost', 'value':'panic|10'},
+            2: {'text': 'I loved her', 'value':'sad|10'},
+            3: {'text': 'Check status', 'value':'wise|10'},
+            4: {'text': 'What happened', 'value':'confusion|10'}
+        }
     },
     5: {
-        'text': '',
+        'text': 'Fifth text',
         'choices': false
     },
 };
