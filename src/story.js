@@ -6,7 +6,8 @@ var TIMER_LENGTH = 10,
     btn_1 = document.getElementById('1'),
     btn_2 = document.getElementById('2'),
     btn_3 = document.getElementById('3'),
-    btn_4 = document.getElementById('4');
+    btn_4 = document.getElementById('4'),
+    controls = document.getElementById('controls');
 
 
 function Story() {
@@ -25,6 +26,7 @@ function Story() {
         btn_3.value = choices[3].value;
         btn_4.innerHTML = choices[4].text;
         btn_4.value = choices[4].value;
+        controls.style.display = 'block';
     };
 
     this.resetButtons = function(choices) {
@@ -36,6 +38,7 @@ function Story() {
         btn_3.value = '';
         btn_4.innerHTML = '';
         btn_4.value = '';
+        controls.style.display = 'none';
     };
     
     this.readNext = function() {

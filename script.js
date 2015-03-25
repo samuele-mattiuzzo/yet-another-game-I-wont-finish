@@ -4,6 +4,7 @@ window.onload = function() {
 
     // loads the game
     var game = new Game();
+    game.load();
     
     // starts the loop
     game.start();
