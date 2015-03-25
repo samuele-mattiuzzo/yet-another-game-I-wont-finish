@@ -29,7 +29,13 @@ function Player() {
         this.checkPower();
     };
 
-    this.handleAction = function() {};
+    this.handleAction = function(value) {
+        var attr = value.split("|")[0],
+            val = parseInt(value.split("|")[1], 10);
+        var curr = this[attr];
+        this[attr] = curr+val;
+        console.log(attr + ": " + this[attr]);
+    };
 
     this.handleSideEffects = function() {
         // eg: check how the values combined increase / decrease rates
