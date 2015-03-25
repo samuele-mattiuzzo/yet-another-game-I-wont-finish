@@ -16,7 +16,10 @@ function Story() {
     
     this.current_read = 0;
     this.max_reads = 5;
-    
+
+    this.in_progress = false;
+
+
     this.setButtons = function(choices) {
         btn_1.innerHTML = choices[1].text;
         btn_1.value = choices[1].value;
@@ -67,19 +70,25 @@ function Story() {
         this.current_read = 0;
     };
     
+    this.stopProgress = function() { this.in_progress = false; };
+
     this.startProgress = function() {
         var counter = 100,
             delta = (TIMER_LENGTH * 100 / counter),
             self = this;
-        (function pbLoop() {
-            counter -= delta;
-            timer.value = counter;
-            if (counter > 0) {
-                setTimeout(pbLoop, SEC);
-            } else {
-                self.readNext();
-            }
-        })();
+        if (this.in_progress === false) {
+            this.in_progress = true;
+            (function pbLoop() {
+                counter -= delta;
+                timer.value = counter;
+                if (counter > 0 && self.in_progress === true) {
+                    setTimeout(pbLoop, SEC);
+                } else {
+                    self.stopProgress();
+                    self.readNext();
+                }
+            })();
+        }
     };
 
     this.startStory = function() {
