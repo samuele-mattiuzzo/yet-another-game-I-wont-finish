@@ -1,6 +1,7 @@
 var TIMER_LENGTH = 10,
     READ_SPEED = 5,
     SEC = 1000,
+    TIMER_IN_PROGRESS = false,
     timer = document.getElementById('timer'),
     text = document.getElementById('text'),
     btn_1 = document.getElementById('1'),
@@ -70,7 +71,7 @@ function Story() {
         this.current_read = 0;
     };
     
-    this.stopProgress = function() { this.in_progress = false; };
+    this.stopProgress = function() { this.in_progress = false; TIMER_IN_PROGRESS = false; };
 
     this.startProgress = function() {
         var counter = 100,
@@ -78,6 +79,7 @@ function Story() {
             self = this;
         if (this.in_progress === false) {
             this.in_progress = true;
+            TIMER_IN_PROGRESS = true;
             (function pbLoop() {
                 counter -= delta;
                 timer.value = counter;

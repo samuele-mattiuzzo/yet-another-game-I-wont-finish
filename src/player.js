@@ -50,10 +50,12 @@ function Player() {
     this.lifeLoop = function(){
         var self = this;
         (function loopChecks(){
-            self.checkBreathing();
-            self.checkPower();
-            self.last_power_check += 1;
-            self.last_breathing_check += 1;
+            if (!TIMER_IN_PROGRESS) {
+                self.checkBreathing();
+                self.checkPower();
+                self.last_power_check += 1;
+                self.last_breathing_check += 1;
+            }
             if (self.air > 0) {
                 setTimeout(loopChecks, SEC);
             } else {
