@@ -1,10 +1,12 @@
+var PLAYER_ALIVE = true;
+
+
 function Game() {
 
     this.player = new Player();
     this.story = new Story();
 
     this.handlePlayerChoice = function(el, self){
-        console.log(el.value);
         self.player.handleAction(el.value);
         self.story.stopProgress();
     };
@@ -23,5 +25,11 @@ function Game() {
 
     this.start = function(){
         this.story.startStory();
+        this.player.lifeLoop();
+        this.updateHud();
     };
+
+    this.end = function() {};
+
+    this.updateHud = function(){};
 }
