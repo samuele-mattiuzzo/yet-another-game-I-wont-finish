@@ -20,6 +20,8 @@ function Player() {
     this.hope = 100;
     this.confusion = 100;
 
+    this.stats_names = ['panic', 'sadness', 'wisdom', 'hope', 'confusion'];
+
     //checks
     this.checkBreathing = function() {
         // breathing is influenced negatively by panic and confusion
@@ -65,15 +67,31 @@ function Player() {
     };
 
     this.handleAction = function(value) {
-        var attr = value.split("|")[0],
-            val = parseInt(value.split("|")[1], 10);
-        var curr = this[attr];
-        this[attr] = curr+val;
-        console.log(attr + ": " + this[attr]);
+        var choice = this._getChoice(value),
+            self = this;
+
+        this.stats_names.forEach(function(stat) {
+            if (stat in choice){
+                self[stat] = self[stat] + choice[stat];
+                console.log(stat + ": " + self[stat]);
+            }
+        });
+        this.handleSideEffects();
     };
 
     this.handleSideEffects = function() {
         // eg: check how the values combined increase / decrease rates
     };
 
+    /* helpers */
+    this._getChapter = function(){
+        var level = game.story.current_level,
+            read = game.story.current_read;
+        return STORY[level][read];
+    };
+
+    this._getChoice = function(choice){
+        var chapter = this._getChapter();
+        return chapter['choices'][choice];
+    };
 }
