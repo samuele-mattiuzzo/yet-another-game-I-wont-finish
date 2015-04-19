@@ -12,8 +12,8 @@ var TIMER_LENGTH = 10,
 
 
 function Story() {
-    this.current_level = 1;
-    this.max_levels = 5;
+    this.current_level = 0;
+    this.max_levels = Object.keys(STORY).length;
     
     this.current_read = 0;
     this.max_reads = 5;
@@ -23,25 +23,17 @@ function Story() {
 
     this.setButtons = function(choices) {
         btn_1.innerHTML = choices[1].text;
-        btn_1.value = choices[1].value;
         btn_2.innerHTML = choices[2].text;
-        btn_2.value = choices[2].value;
         btn_3.innerHTML = choices[3].text;
-        btn_3.value = choices[3].value;
         btn_4.innerHTML = choices[4].text;
-        btn_4.value = choices[4].value;
         controls.style.display = 'block';
     };
 
     this.resetButtons = function(choices) {
         btn_1.innerHTML = '';
-        btn_1.value = '';
         btn_2.innerHTML = '';
-        btn_2.value = '';
         btn_3.innerHTML = '';
-        btn_3.value = '';
         btn_4.innerHTML = '';
-        btn_4.value = '';
         controls.style.display = 'none';
     };
     
