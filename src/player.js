@@ -71,12 +71,16 @@ function Player() {
             self = this;
 
         this.stats_names.forEach(function(stat) {
-            if (stat in choice){
+            if (choice.get(stat)){
                 self[stat] = self[stat] + choice[stat];
-                console.log(stat + ": " + self[stat]);
             }
         });
         this.handleSideEffects();
+        // change just before readNext if diverts from normal pathing
+        if (choice.get('link_to')) {
+            game.story.next_read = choice['link_to'];
+        }
+        game.story.stopProgress();
     };
 
     this.handleSideEffects = function() {
@@ -85,13 +89,11 @@ function Player() {
 
     /* helpers */
     this._getChapter = function(){
-        var level = game.story.current_level,
-            read = game.story.current_read;
-        return STORY[level][read];
+        return STORY[game.story.current_read];
     };
 
     this._getChoice = function(choice){
         var chapter = this._getChapter();
-        return chapter['choices'][choice];
+        return chapter.get('choice')[choice];
     };
 }

@@ -12,43 +12,47 @@ var TIMER_LENGTH = 10,
 
 
 function Story() {
-    this.current_level = 0;
-    this.max_levels = Object.keys(STORY).length;
-    
-    this.current_read = 0;
-    this.max_reads = 5;
+    this.current_read = 1;
+    this.next_read = 1;
 
     this.in_progress = false;
 
 
     this.setButtons = function(choices) {
-        btn_1.innerHTML = choices[1].text;
-        btn_2.innerHTML = choices[2].text;
-        btn_3.innerHTML = choices[3].text;
-        btn_4.innerHTML = choices[4].text;
+        this.resetButtons();
         controls.style.display = 'block';
+        for(var i=1; i<=4; i++) {
+            if(choices.get(i)){
+                window['btn_'+i].fadingInnerHTML(choices[i]['text']);
+            } else {
+                window['btn_'+i].style.display = 'none';
+            }
+        }
     };
 
     this.resetButtons = function(choices) {
-        btn_1.innerHTML = '';
-        btn_2.innerHTML = '';
-        btn_3.innerHTML = '';
-        btn_4.innerHTML = '';
+        for(var i=1; i<=4; i++) {
+            window['btn_'+i].innerHTML = '';
+            window['btn_'+i].style.display = 'block';
+        }
         controls.style.display = 'none';
     };
     
     this.readNext = function() {
-        if (this.current_level == this.max_levels){ return; }
+        // normal pathing
+        this.current_read = this.next_read;
+        var chapter = STORY[this.current_read];
+        this.next_read = chapter.get('link_to');
 
-        if (this.current_read == this.max_reads) {
-            this.nextChapter();
+        if(chapter.get('ending')) {
+            /*handle ending*/
+            game.end();
         }
 
-        this.current_read += 1;
-        var choices = STORY[this.current_level][this.current_read]['choices'];
-        text.innerHTML = STORY[this.current_level][this.current_read]['text'];
+        var choices = chapter.get('choices');
+        text.fadingInnerHTML(chapter.get('text'));
 
-        if (choices !== false) {
+        if (choices) {
             this.setButtons(choices);
             this.startProgress();
         } else {
@@ -58,10 +62,7 @@ function Story() {
         }
     };
 
-    this.nextChapter = function() {
-        this.current_level += 1;
-        this.current_read = 0;
-    };
+    this.nextChapter = function() {};
     
     this.stopProgress = function() { this.in_progress = false; TIMER_IN_PROGRESS = false; };
 
