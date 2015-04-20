@@ -1,10 +1,10 @@
 /*
-    story = array[1..5]
+    story = {}
     
-    block = 
+    read = 
     <ID (int)> : {
         'text': <string>,
-        'choices': [false | {
+        'choices': {
             <ID (int)>: {
                 'text': <string>,
                 'panic': <int>,
@@ -12,17 +12,16 @@
                 'hope': <int>,
                 'wisdom': <int>,
                 'confusion': <int>,
-                'link_to': <ID (int)> // block_id
+                'link_to': <ID (int)> // read_id
             }
-        }],
-        'link_to': <ID (int)> // block_id,
-        'ending': [false | <ID (int)> // ending_id]
+        },
+        'link_to': <ID (int)> // read_id,
+        'ending': <ID (int)> // ending_id
     }
 */
 
-var STORY = {};
 
-STORY[1] = {
+var STORY = {
     1: {
         'text': 'test',
         'choices': {
@@ -34,6 +33,7 @@ STORY[1] = {
                 'link_to': 2
             }
         },
-        'link_to': 2,
+        'link_to': 1,
     }
 };
+
